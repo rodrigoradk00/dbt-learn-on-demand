@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: dbt_test
+    database: LEARNING_ANALYTICS_DEV 
+    tables:
+      - name: customers
+      - name: orders
+        loaded_at_field: _etl_loaded_at
+        freshness:
+          warn_after: {count: 120, period: hour}
+          error_after: {count: 240, period: hour}
